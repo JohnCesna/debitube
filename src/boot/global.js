@@ -1,7 +1,15 @@
-// import something here
+import { reactive, readonly } from 'vue'
 
-// "async" is optional;
-// more info on params: https://quasar.dev/quasar-cli/boot-files
-export default async (/* { app, router, Vue ... } */) => {
-  // something to do
+const state = reactive({
+  count: 0
+})
+
+const increment = function () {
+  state.count++
+}
+
+const global = { state: readonly(state), increment }
+
+export default async ({ app }) => {
+  app.provide(global)
 }
